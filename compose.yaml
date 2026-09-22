@@ -1,0 +1,8 @@
+# Self-host Facet: builds the static app and serves it on http://localhost:8080.
+# Clone the app first:  git clone https://github.com/omnidotdev/facet-app services/facet-app
+services:
+  facet:
+    build: services/facet-app
+    ports:
+      - "8080:8080"
+    restart: unless-stopped

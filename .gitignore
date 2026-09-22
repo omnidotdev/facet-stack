@@ -1,0 +1,7 @@
+# Service repos are cloned in here as separate repositories
+services/*/
+!services/.gitkeep
+
+node_modules/
+.env.local
+.DS_Store
