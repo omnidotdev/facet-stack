@@ -1,42 +1,45 @@
-# Facet 🔶
+# 🔶 Facet Metarepo
 
-Code-first parametric CAD, in the browser. Write a model in code, a solid
-geometry (CSG) kernel turns it into a mesh, a 3D viewport shows it live, and you
-export a print-ready STL.
+Facet is code-first parametric CAD in the browser: write a model in code, evaluate it with a solid-geometry kernel, preview it in 3D, and export a print-ready STL or 3MF. This metarepo groups the Facet services for local development and self-hosting.
 
-Live at **[facet.omni.dev](https://facet.omni.dev)**. Part of the
-[Omni](https://omni.dev) ecosystem, in partnership with
-[MatterForge](https://matterforge.io). Licensed under Apache-2.0.
+## Services
 
-## Repositories
+| Service | Stack | Description |
+|---------|-------|-------------|
+| `facet-app` | TanStack Router / Tauri / Rust+WASM | The Studio web app and geometry kernels |
 
-Facet is a single client-side app:
+## Prerequisites
 
-- **[facet-app](https://github.com/omnidotdev/facet-app)** — the web app
-  (TanStack Router + Tauri) with TypeScript and Rust/WASM geometry kernels.
+- [Bun](https://bun.sh)
+- [Docker](https://docs.docker.com/get-docker) (with Compose), to run the stack in a container
 
-## Self-hosting
+## Getting Started
 
-Facet is a static single-page app, so any static host can serve it.
-
-Clone and build it directly:
+Facet is a single client-side app, so there is no orchestration to configure. Clone the app into `services/` and run it:
 
 ```sh
 git clone https://github.com/omnidotdev/facet-app services/facet-app
 cd services/facet-app
 bun install
-bun run build      # emits dist/, serve it with any static host
+bun run dev      # https://localhost:3000
 ```
 
-Or build and serve the container with Docker Compose (http://localhost:8080):
+## Docker Compose
+
+`compose.yaml` builds and serves the app on http://localhost:8080. Clone the app first:
 
 ```sh
 git clone https://github.com/omnidotdev/facet-app services/facet-app
 docker compose up --build
 ```
 
-See the [docs](https://omni.dev/products/facet) for details.
+## Diagnostics
+
+- The container serves the static SPA on `8080`; a plain `GET /` returning 200 is a sufficient liveness probe.
+- Run the engine unit tests from the app: `cd services/facet-app && bun test src`.
+
+Full documentation lives at [docs.omni.dev/products/facet](https://docs.omni.dev/products/facet).
 
 ## License
 
-[Apache-2.0](./LICENSE.md).
+The code in this repository is licensed under Apache 2.0, &copy; [Omni LLC](https://omni.dev). See [LICENSE.md](LICENSE.md) for more information.
